@@ -90,6 +90,7 @@ const i18nMap = {
   ja: () => import("./i18n/ja"),
   ms: () => import("./i18n/ms"),
   zh: () => import("./i18n/zh"),
+  vi: () => import("./i18n/vi"),
 };
 
 const localeIdFactory = (): keyof typeof i18nMap => {
