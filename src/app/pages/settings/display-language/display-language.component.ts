@@ -20,5 +20,6 @@ export class DisplayLanguageComponent {
     { value: "ja", label: "日本語" },
     { value: "ms", label: "Melayu" },
     { value: "zh", label: "中文" },
+    { value: "vi", label: "Tiếng Việt" },
   ];
 }

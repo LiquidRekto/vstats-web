@@ -89,13 +89,13 @@ const i18nMap = {
   es: () => import("./i18n/es"),
   ja: () => import("./i18n/ja"),
   ms: () => import("./i18n/ms"),
+  vi: () => import("./i18n/vi"),
   zh: () => import("./i18n/zh"),
 };
 
 const localeIdFactory = (): keyof typeof i18nMap => {
   const lang = getLocalStorage("lang", window.navigator.language.slice(0, 2));
 
-  // fallback to default language
   if (lang in i18nMap) {
     return lang as any;
   }
