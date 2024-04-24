@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input, output } from "@angular/core";
+import { Component, input, output } from "@angular/core";
 import type { EChartsOption } from "echarts";
 import type { ECharts } from "echarts/core";
 

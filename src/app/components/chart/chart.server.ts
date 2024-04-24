@@ -1,4 +1,6 @@
 import { Component, input, output } from "@angular/core";
+import type { EChartsOption } from "echarts";
+import type { ECharts } from "echarts/core";
 
 @Component({
   selector: "vts-chart",
@@ -13,8 +15,8 @@ import { Component, input, output } from "@angular/core";
   host: { ngSkipHydration: "true" },
 })
 export class Chart {
-  height = input();
-  options = input();
-  chartInit = output();
-  loading = input();
+  loading = input(false);
+  options = input.required<EChartsOption | null | undefined>();
+  height = input<number>(400);
+  chartInit = output<ECharts>();
 }
