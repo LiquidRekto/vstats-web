@@ -22,13 +22,13 @@
   class="dense-menu vts-menu-panel max-h-80"
   xPosition="before"
 >
-  @if (!hideYouTube) {
+  @if (!hideYouTube()) {
     <button mat-menu-item (click)="handleChange('YOUTUBE')">YouTube</button>
   }
-  @if (!hideTwitch) {
+  @if (!hideTwitch()) {
     <button mat-menu-item (click)="handleChange('TWITCH')">Twitch</button>
   }
-  @if (!hideBilibili) {
+  @if (!hideBilibili()) {
     <button mat-menu-item (click)="handleChange('BILIBILI')">Bilibili</button>
   }
 </mat-menu>

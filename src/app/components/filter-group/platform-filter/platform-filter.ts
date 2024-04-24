@@ -6,12 +6,12 @@ import {
 
 import {
   Component,
-  EventEmitter,
   Input,
-  Output,
   booleanAttribute,
   computed,
   inject,
+  input,
+  output,
   signal,
 } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
@@ -44,9 +44,9 @@ export class PlatformFilter {
     },
   ];
 
-  @Input({ transform: booleanAttribute }) hideYouTube = false;
-  @Input({ transform: booleanAttribute }) hideTwitch = false;
-  @Input({ transform: booleanAttribute }) hideBilibili = false;
+  hideYouTube = input(false, { transform: booleanAttribute });
+  hideTwitch = input(false, { transform: booleanAttribute });
+  hideBilibili = input(false, { transform: booleanAttribute });
 
   selected = signal(Platform.YOUTUBE);
 
@@ -71,5 +71,5 @@ export class PlatformFilter {
     this.onChange.emit(value);
   };
 
-  @Output() onChange = new EventEmitter<string>();
+  onChange = output<string>();
 }

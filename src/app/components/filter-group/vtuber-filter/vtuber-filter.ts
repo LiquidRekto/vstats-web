@@ -4,13 +4,7 @@ import {
   OverlayModule,
 } from "@angular/cdk/overlay";
 import { NgOptimizedImage } from "@angular/common";
-import {
-  Component,
-  EventEmitter,
-  Output,
-  ViewEncapsulation,
-  inject,
-} from "@angular/core";
+import { Component, ViewEncapsulation, inject, output } from "@angular/core";
 import { MatListModule, MatSelectionListChange } from "@angular/material/list";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { AvatarPipe, NamePipe } from "src/app/shared";
@@ -64,11 +58,11 @@ export class VTuberFilter {
 
   _vtubers = this.vtubers.selectedIds();
 
-  @Output() selectedChange = new EventEmitter<Set<string>>();
+  selectedChange = output<Set<string>>();
 
   public clear() {
     this.selected.clear();
-    this.selectedChange.next(this.selected);
+    this.selectedChange.emit(this.selected);
   }
 
   onListChange(event: MatSelectionListChange) {
@@ -80,6 +74,6 @@ export class VTuberFilter {
       }
     });
 
-    this.selectedChange.next(this.selected);
+    this.selectedChange.emit(this.selected);
   }
 }

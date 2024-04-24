@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from "@angular/core";
+import { Component, EventEmitter, Output, input, output } from "@angular/core";
 import type { EChartsOption } from "echarts";
 import type { ECharts } from "echarts/core";
 
@@ -69,6 +69,5 @@ export class Chart {
   loading = input(false);
   options = input.required<EChartsOption | null | undefined>();
   height = input<number>(400);
-
-  @Output() chartInit = new EventEmitter<ECharts>();
+  chartInit = output<ECharts>();
 }

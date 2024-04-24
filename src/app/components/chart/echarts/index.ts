@@ -24,6 +24,7 @@ import {
   effect,
   inject,
   input,
+  output,
   untracked,
   viewChild,
 } from "@angular/core";
@@ -70,7 +71,7 @@ export class EChartsComponent {
 
   height = input.required<number>();
   options = input.required<EChartsOption | null | undefined>();
-  @Output() chartInit = new EventEmitter<ECharts>();
+  chartInit = output<ECharts>();
 
   container = viewChild.required<ElementRef>("container");
 

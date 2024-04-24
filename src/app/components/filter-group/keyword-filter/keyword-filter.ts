@@ -1,9 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Output,
-  ViewEncapsulation,
-} from "@angular/core";
+import { Component, ViewEncapsulation, output } from "@angular/core";
 
 @Component({
   standalone: true,
@@ -24,5 +19,5 @@ export class KeywordFilter {
     this.onChange.emit($event.target.value);
   };
 
-  @Output() onChange = new EventEmitter<string>();
+  onChange = output<string>();
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { Component, input, output } from "@angular/core";
 
 @Component({
   selector: "vts-chart",
@@ -13,8 +13,8 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
   host: { ngSkipHydration: "true" },
 })
 export class Chart {
-  @Input() height?: number;
-  @Input() options: any;
-  @Output() chartInit = new EventEmitter();
-  @Input() loading?: boolean;
+  height = input();
+  options = input();
+  chartInit = output();
+  loading = input();
 }

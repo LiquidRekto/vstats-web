@@ -9,7 +9,7 @@
     <div class="flex-1"></div>
     <vts-refresh-button
       [isLoading]="result.isFetching"
-      [refresh]="result.refetch"
+      (onRefresh)="result.refetch()"
       [updatedAt]="result.data?.pages?.[0]?.updatedAt"
     />
   </div>

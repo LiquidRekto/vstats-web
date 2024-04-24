@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { Component, Input } from "@angular/core";
+import { Component, input, output } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -12,17 +12,17 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     <button
       mat-icon-button
       [disabled]="isLoading"
-      (click)="refresh()"
+      (click)="onRefresh.emit()"
       i18n-matTooltip="@@updated-at"
-      matTooltip="Updated at {{ updatedAt | date: 'MM/dd HH:mm' }}"
+      matTooltip="Updated at {{ updatedAt() | date: 'MM/dd HH:mm' }}"
       aria-label="Refresh"
     >
-      <mat-icon [class.animate-spin]="isLoading" svgIcon="refresh" />
+      <mat-icon [class.animate-spin]="isLoading()" svgIcon="refresh" />
     </button>
   `,
 })
 export class RefreshButton {
-  @Input() isLoading: boolean = false;
-  @Input() updatedAt: Date | number | undefined | null;
-  @Input({ required: true }) refresh!: VoidFunction;
+  isLoading = input(false);
+  updatedAt = input<Date | number | undefined | null>();
+  onRefresh = output();
 }

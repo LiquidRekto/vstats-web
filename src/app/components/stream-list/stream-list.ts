@@ -2,14 +2,13 @@ import { isPlatformServer } from "@angular/common";
 import {
   Component,
   ElementRef,
-  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
-  Output,
   PLATFORM_ID,
   ViewChild,
   inject,
+  output,
 } from "@angular/core";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
@@ -38,7 +37,7 @@ export class StreamsList implements OnInit, OnDestroy {
   @Input() groupBy: boolean = false;
   @Input() loading: boolean = false;
   @Input() hideSpinner: boolean = false;
-  @Output() reachedEnd = new EventEmitter();
+  reachedEnd = output();
 
   obs?: IntersectionObserver;
   platformId = inject(PLATFORM_ID);

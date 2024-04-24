@@ -12,6 +12,7 @@ import {
   ViewEncapsulation,
   computed,
   inject,
+  output,
   signal,
 } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
@@ -63,7 +64,7 @@ export class DateFilter {
 
   locale = inject(LOCALE_ID);
 
-  @Output() selectedChange = new EventEmitter<[Date, Date] | null>();
+  selectedChange = output<[Date, Date] | null>();
 
   minDate = new Date(2016, 10, 29);
   maxDate = new Date();
@@ -113,7 +114,7 @@ export class DateFilter {
       }
 
       this.range.set(new DateRange(start, end));
-      this.selectedChange.next([start, end]);
+      this.selectedChange.emit([start, end]);
       this.open.set(false);
     } else {
       this.lastRange = range;

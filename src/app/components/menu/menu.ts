@@ -1,10 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   Input,
-  Output,
   ViewEncapsulation,
+  output,
 } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -55,7 +54,7 @@ export class Menu<Value> {
 
   open: boolean = false;
 
-  @Output("change") onChange = new EventEmitter<Value>();
+  onChange = output<Value>({ alias: "change" });
 
   get selected(): string | undefined {
     const option = this.options.find((o) => o.value === this.value);
