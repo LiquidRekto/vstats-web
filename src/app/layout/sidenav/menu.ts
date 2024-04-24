@@ -24,7 +24,7 @@ import { DrawerService } from "src/app/shared/services/drawer";
         {{ headline }}
       </div>
     }
-    @for (item of items; track item) {
+    @for (item of items; track item.link) {
       <a
         mat-list-item
         [routerLink]="item.link"

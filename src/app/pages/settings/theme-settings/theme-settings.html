@@ -4,7 +4,7 @@
     [value]="themeSetting()"
     (selectionChange)="themeSetting.set($event.value)"
   >
-    @for (option of options; track option) {
+    @for (option of options; track option.value) {
       <mat-option [value]="option.value">
         {{ option.label }}
       </mat-option>

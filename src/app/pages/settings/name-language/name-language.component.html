@@ -4,7 +4,7 @@
     [value]="nameSetting()"
     (selectionChange)="nameSetting.set($event.value)"
   >
-    @for (lang of languages; track lang) {
+    @for (lang of languages; track lang.value) {
       <mat-option [value]="lang.value">
         {{ lang.label }}
       </mat-option>

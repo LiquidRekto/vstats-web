@@ -2,7 +2,7 @@
   <mat-label>Saved to playlist</mat-label>
 
   <mat-select [value]="selected">
-    @for (item of items; track item) {
+    @for (item of items; track item.id) {
       <mat-option [value]="item.id">
         {{ item.snippet.localized.title }}
       </mat-option>

@@ -46,7 +46,7 @@ export type StreamEventsGroup = {
           (change)="selectedChip.set($event.value)"
           hideSingleSelectionIndicator
         >
-          @for (option of chipOptions(); track option) {
+          @for (option of chipOptions(); track option.value) {
             <mat-chip-option [value]="option.value">
               {{ option.label }}
             </mat-chip-option>

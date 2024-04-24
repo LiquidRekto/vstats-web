@@ -1,5 +1,11 @@
 import { NgOptimizedImage } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  computed,
+  input,
+} from "@angular/core";
 import { MatIconModule } from "@angular/material/icon";
 
 import { Channel, Platform, VTuber } from "src/app/models";
@@ -13,13 +19,13 @@ import { AvatarPipe, NamePipe } from "src/app/shared";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VtuberSummary {
-  @Input({ required: true }) vtuber!: VTuber;
-  @Input({ required: true }) channels!: Array<Channel>;
+  vtuber = input.required<VTuber>();
+  channels = input.required<Array<Channel>>();
 
-  get links(): { href: string; icon: string }[] {
+  links = computed<{ href: string; icon: string }[]>(() => {
     const links = [];
 
-    const yt = this.channels.find((c) => c.platform === Platform.YOUTUBE);
+    const yt = this.channels().find((c) => c.platform === Platform.YOUTUBE);
     if (yt) {
       links.push({
         href: "https://www.youtube.com/channel/" + yt.platformId,
@@ -27,14 +33,15 @@ export class VtuberSummary {
       });
     }
 
-    if (this.vtuber.twitterUsername) {
+    const tw = this.vtuber().twitterUsername;
+    if (tw) {
       links.push({
-        href: "https://twitter.com/" + this.vtuber.twitterUsername,
+        href: "https://twitter.com/" + tw,
         icon: "twitter",
       });
     }
 
-    const bl = this.channels.find((c) => c.platform === "BILIBILI");
+    const bl = this.channels().find((c) => c.platform === "BILIBILI");
     if (bl) {
       links.push({
         href: "https://space.bilibili.com/" + bl.platformId,
@@ -43,5 +50,5 @@ export class VtuberSummary {
     }
 
     return links;
-  }
+  });
 }

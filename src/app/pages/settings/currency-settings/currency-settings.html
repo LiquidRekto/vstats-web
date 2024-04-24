@@ -5,7 +5,7 @@
     [value]="config.currencySetting()"
     (selectionChange)="config.currencySetting.set($event.value)"
   >
-    @for (currency of currencies; track currency) {
+    @for (currency of currencies; track currency[0]) {
       <mat-option [value]="currency[0]">
         {{ currency[0] }}
         @if (currency[2]) {

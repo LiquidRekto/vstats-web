@@ -1,11 +1,11 @@
 import { DatePipe } from "@angular/common";
-import { Component, Input, input, signal } from "@angular/core";
+import { Component, input, signal } from "@angular/core";
 
 import { DateFilter } from "src/app/components/filter-group/date-filter/date-filter";
 import { KeywordFilter } from "src/app/components/filter-group/keyword-filter/keyword-filter";
 import { RefreshButton } from "src/app/components/refresh-button/refresh-button";
 import { StreamsList } from "src/app/components/stream-list/stream-list";
-import { Channel, Stream, VTuber } from "src/app/models";
+import { Channel, Stream } from "src/app/models";
 import { streams } from "src/app/shared/api/entrypoint";
 import { infiniteQuery } from "src/app/shared/qry";
 
@@ -27,8 +27,6 @@ type QueryKey = [
   templateUrl: "./vtuber-streams.html",
 })
 export class VtuberStreams {
-  @Input({ required: true }) vtuber!: VTuber;
-
   channels = input<Array<Channel>>([]);
 
   selectedDateRange = signal<[Date, Date] | null>(null);
