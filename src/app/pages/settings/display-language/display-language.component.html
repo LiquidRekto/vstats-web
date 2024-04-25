@@ -1,5 +1,5 @@
 <mat-form-field appearance="outline" class="w-full">
-  <mat-label>Display Language</mat-label>
+  <mat-label i18n="@@display-language">Display Language</mat-label>
   <mat-select [value]="locale" (selectionChange)="config.setLang($event.value)">
     @for (lang of languages; track lang.value) {
       <mat-option [value]="lang.value">

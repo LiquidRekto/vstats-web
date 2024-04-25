@@ -35,14 +35,15 @@
     [@transformPanel]="_isOpen"
   >
     <div class="sticky text-sm flex top-0 mat-bg-card px-4 py-2 z-50">
-      <div class="flex-1">Filter by vtuber</div>
+      <div class="flex-1" i18n="@@filter-by-vtuber">Filter by VTuber</div>
       <div
         tabindex="0"
         role="button"
         class="cursor-pointer"
         (click)="_isOpen = false; clear()"
+        i18n="@@clear"
       >
-        clear
+        Clear
       </div>
     </div>
     <mat-selection-list

@@ -13,8 +13,8 @@ import { RouterModule } from "@angular/router";
       class="!w-20 !h-20 mb-4"
       svgIcon="alert-decagram-outline"
     />
-    <div class="mb-8">Not results, try select at least one vtuber</div>
-    <button class="!rounded-full" mat-stroked-button routerLink="/settings">
+    <div class="mb-8" i18n="@@channel-no-results">No results, try selecting at least one VTuber</div>
+    <button class="!rounded-full" mat-stroked-button routerLink="/settings" i18n="@@select-vtuber">
       Select VTuber
     </button>
   `,
