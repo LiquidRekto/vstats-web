@@ -3,10 +3,13 @@
 export { default as locale } from "@angular/common/locales/zh-Hant";
 export { default as dateFnsLocale } from "date-fns/locale/zh-TW";
 
+import { VSTATS_DISCORD_URL } from "src/constants/misc";
 import type { translations as t } from "./messages.json";
 
 export const translations: typeof t = {
   "updated-at": "更新於 {$INTERPOLATION}",
+  "channel-no-results": "No results, try selecting at least one VTuber",
+  "select-vtuber": "Select VTuber ",
   name: "名稱",
   total: "總計",
   subscribers: "訂閱",
@@ -37,12 +40,25 @@ export const translations: typeof t = {
   today: "今天",
   yesterday: "昨天",
   tomorrow: "明天",
-  "this-week": " 本周",
-  "this-month": " 本月",
-  "this-year": " 今年",
+  "this-week": "本周",
+  "this-month": "本月",
+  "this-year": "今年",
   future: "未來",
+  "on-air": "On Air",
   revenue: "收入",
   about: "關於",
+  "about-1":
+    "vtstats is a platform for VTubers Statistics and Data Visualization. ",
+  "about-2":
+    "This is an open source project, you can find the source code at {$START_LINK}GitHub{$CLOSE_LINK}. ",
+  "about-3":
+    "If you find this website useful, consider supporting it with a donation by ",
+  "about-4": `Join our discord server at {$START_LINK}${VSTATS_DISCORD_URL}{$CLOSE_LINK}. `,
+  "about-5":
+    "Credits to {$START_LINK}Return YouTube Dislike{$CLOSE_LINK} for providing youtube like/dislike data. ",
+  "filter-by-vtuber": "Filter by VTuber",
+  clear: "Clear ",
+  misc: "Miscellaneous",
   "super-chats": "超級留言",
   "super-sticker": "超級貼圖",
   "new-member": "New Member",
@@ -52,7 +68,18 @@ export const translations: typeof t = {
   member: "會員",
   "hyper-chat": "Hyper Chat",
   search: "搜索",
-
+  currency: "Currency",
+  "display-language": "Display Language",
+  "name-language": "Name Language",
+  appearance: "Appearance",
+  language: "Language",
+  region: "Region",
+  vtuber: "VTuber",
+  "yt-account": "YouTube Account",
+  theme: "Theme",
+  timezone: "Timezone",
+  "selected-vtuber-per-total":
+    "Selected {$INTERPOLATION} out of {$INTERPOLATION_1}\n",
   // streamLikes: "喜歡",
   "currency-gbp": "英鎊",
   "currency-jpy": "日元",

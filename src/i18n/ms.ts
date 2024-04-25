@@ -3,10 +3,13 @@
 export { default as locale } from "@angular/common/locales/ms";
 export { default as dateFnsLocale } from "date-fns/locale/ms";
 
+import { VSTATS_DISCORD_URL } from "src/constants/misc";
 import type { translations as t } from "./messages.json";
 
 export const translations: typeof t = {
   "updated-at": "Kemas kini terakhir pada {$INTERPOLATION}",
+  "channel-no-results": "No results, try selecting at least one VTuber",
+  "select-vtuber": "Select VTuber ",
   name: "Nama",
   total: "Jumlah",
   subscribers: "Pelanggan",
@@ -49,6 +52,18 @@ export const translations: typeof t = {
   // streamLikes: "Likes",
   revenue: "Revenue",
   about: "About",
+  "about-1":
+    "vtstats is a platform for VTubers Statistics and Data Visualization. ",
+  "about-2":
+    "This is an open source project, you can find the source code at {$START_LINK}GitHub{$CLOSE_LINK}. ",
+  "about-3":
+    "If you find this website useful, consider supporting it with a donation by ",
+  "about-4": `Join our discord server at {$START_LINK}${VSTATS_DISCORD_URL}{$CLOSE_LINK}. `,
+  "about-5":
+    "Credits to {$START_LINK}Return YouTube Dislike{$CLOSE_LINK} for providing youtube like/dislike data. ",
+  "filter-by-vtuber": "Filter by VTuber",
+  clear: "Clear ",
+  misc: "Miscellaneous",
   "super-chats": "Super Chat",
   "super-sticker": "Super Stickers",
   "new-member": "New Member",
@@ -58,7 +73,19 @@ export const translations: typeof t = {
   member: "Member",
   "hyper-chat": "Hyper Chat",
   search: "Search",
-
+  currency: "Currency",
+  "display-language": "Display Language",
+  "name-language": "Name Language",
+  appearance: "Appearance",
+  language: "Language",
+  region: "Region",
+  vtuber: "VTuber",
+  "yt-account": "YouTube Account",
+  theme: "Theme",
+  timezone: "Timezone",
+  "on-air": "On Air",
+  "selected-vtuber-per-total":
+    "Selected {$INTERPOLATION} out of {$INTERPOLATION_1}\n",
   "currency-gbp": "United Kingdom Pound",
   "currency-jpy": "Japan Yen",
   "currency-krw": "South Korean Won",

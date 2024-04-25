@@ -3,10 +3,13 @@
 export { default as locale } from "@angular/common/locales/es";
 export { default as dateFnsLocale } from "date-fns/locale/es";
 
+import { VSTATS_DISCORD_URL } from "src/constants/misc";
 import type { translations as t } from "./messages.json";
 
 export const translations: typeof t = {
   "updated-at": "Última vez actualizado {$INTERPOLATION}",
+  "channel-no-results": "No results, try selecting at least one VTuber",
+  "select-vtuber": "Select VTuber ",
   name: "Nombre",
   total: "Total",
   subscribers: "Subscriptores",
@@ -29,6 +32,18 @@ export const translations: typeof t = {
   revenue: "Revenue",
   "select-date": "Select Date",
   about: "About",
+  "about-1":
+    "vtstats is a platform for VTubers Statistics and Data Visualization. ",
+  "about-2":
+    "This is an open source project, you can find the source code at {$START_LINK}GitHub{$CLOSE_LINK}. ",
+  "about-3":
+    "If you find this website useful, consider supporting it with a donation by ",
+  "about-4": `Join our discord server at {$START_LINK}${VSTATS_DISCORD_URL}{$CLOSE_LINK}. `,
+  "about-5":
+    "Credits to {$START_LINK}Return YouTube Dislike{$CLOSE_LINK} for providing youtube like/dislike data. ",
+  misc: "Miscellaneous",
+  "filter-by-vtuber": "Filter by VTuber",
+  clear: "Clear ",
   "live-stream": "Directo de",
   scheduled: "Horario",
   "super-chats": "Super Chat",
@@ -47,7 +62,19 @@ export const translations: typeof t = {
   "this-month": "Este mes",
   "this-year": "Este año",
   future: "Futuro",
-
+  "on-air": "On Air",
+  currency: "Currency",
+  "display-language": "Display Language",
+  "name-language": "Name Language",
+  appearance: "Appearance",
+  language: "Language",
+  region: "Region",
+  vtuber: "VTuber",
+  "yt-account": "YouTube Account",
+  theme: "Theme",
+  timezone: "Timezone",
+  "selected-vtuber-per-total":
+    "Selected {$INTERPOLATION} out of {$INTERPOLATION_1}\n",
   "currency-aed": "United Arab Emirates Dirham",
   "currency-afn": "Afghan Afghani",
   "currency-all": "Albanian Lek",
