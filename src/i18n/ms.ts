@@ -3,6 +3,7 @@
 export { default as locale } from "@angular/common/locales/ms";
 export { default as dateFnsLocale } from "date-fns/locale/ms";
 
+import { VSTATS_DISCORD_URL } from "src/constants/misc";
 import type { translations as t } from "./messages.json";
 
 export const translations: typeof t = {
@@ -54,7 +55,7 @@ export const translations: typeof t = {
   "about-1": " vtstats is a platform for VTubers Statistics and Data Visualization. ",
   "about-2": " This is an open source project, you can find the source code at {$START_LINK}GitHub{$CLOSE_LINK}. ",
   "about-3": " If you find this website useful, consider supporting it with a donation by ",
-  "about-4": " Join our discord server at {$START_LINK}https://discord.gg/m9NwUzKbkK{$CLOSE_LINK}. ",
+  "about-4": ` Join our discord server at {$START_LINK}${VSTATS_DISCORD_URL}{$CLOSE_LINK}. `,
   "about-5": " Credits to {$START_LINK}Return YouTube Dislike{$CLOSE_LINK} for providing youtube like/dislike data. ",
   "filter-by-vtuber": "Filter by VTuber",
   "clear": " Clear ",
