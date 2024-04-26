@@ -2,6 +2,7 @@ import { FlatTreeControl } from "@angular/cdk/tree";
 import { Component, computed, effect, inject } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import {
   MatTreeFlatDataSource,
@@ -12,6 +13,7 @@ import {
 import { Group } from "src/app/models";
 import { AvatarPipe } from "src/app/shared";
 import { VTuberService } from "src/app/shared/config/vtuber.service";
+import { VTubersSettingsFilter } from "./vtubers-settings-filter/vtubers-settings-filter";
 
 interface Node {
   id: string;
@@ -26,8 +28,10 @@ interface Node {
     MatTreeModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatExpansionModule,
     MatIconModule,
     AvatarPipe,
+    VTubersSettingsFilter
   ],
   selector: "vts-vtubers-settings",
   templateUrl: "vtubers-settings.html",
