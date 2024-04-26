@@ -46,7 +46,7 @@ export class GroupStreamsPipe implements PipeTransform {
 
   _getName(stream: Stream): string {
     if (stream.status === StreamStatus.LIVE) {
-      return "On Air";
+      return $localize`:@@on-air:On Air`;
     }
 
     const time =

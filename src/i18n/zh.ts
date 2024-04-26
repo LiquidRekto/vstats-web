@@ -43,6 +43,7 @@ export const translations: typeof t = {
   "this-month": " 本月",
   "this-year": " 今年",
   future: "未來",
+  "on-air": "On Air",
   revenue: "收入",
   about: "關於",
   "about-1": " vtstats is a platform for VTubers Statistics and Data Visualization. ",

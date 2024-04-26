@@ -57,6 +57,7 @@ export const translations: typeof t = {
   "this-month": "Este mes",
   "this-year": "Este año",
   future: "Futuro",
+  "on-air": "On Air",
   "currency": "Currency",
   "display-language": "Display Language",
   "name-language": "Name Language",

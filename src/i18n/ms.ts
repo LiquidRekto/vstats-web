@@ -78,6 +78,7 @@ export const translations: typeof t = {
   "yt-account": "YouTube Account",
   "theme": "Theme",
   "timezone": "Timezone",
+  "on-air": "On Air",
   "selected-vtuber-per-total": " Selected {$INTERPOLATION} out of {$INTERPOLATION_1}\n",
   "currency-gbp": "United Kingdom Pound",
   "currency-jpy": "Japan Yen",

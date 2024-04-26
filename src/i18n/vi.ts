@@ -29,6 +29,7 @@ export const translations: typeof t = {
   "this-month": "Tháng này",
   "this-year": "Năm nay",
   future: "Tương lai",
+  "on-air": "Đang lên sóng",
   "select-language": "Chọn Ngôn ngữ",
   "stream-viewers": "Người xem Stream",
   revenue: "Doanh thu",
