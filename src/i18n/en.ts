@@ -57,6 +57,7 @@ export const translations: typeof t = {
   member: "Member",
   "hyper-chat": "Hyper Chat",
   search: "Search",
+  "on-air": "On Air",
   "currency": "Currency",
   "display-language": "Display Language",
   "name-language": "Name Language",

@@ -72,6 +72,7 @@ export const translations: typeof t = {
   "vtuber": "VTuber",
   "yt-account": "YouTube Account",
   "theme": "Theme",
+  "on-air": "On Air",
   "timezone": "Timezone",
   "selected-vtuber-per-total": " Selected {$INTERPOLATION} out of {$INTERPOLATION_1}\n",
   // streamLikes: "高く評価",
