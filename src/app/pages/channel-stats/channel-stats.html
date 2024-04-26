@@ -11,7 +11,7 @@
           (onChange)="platformFilter.set($event)"
         />
       }
-      <vts-vtuber-filter (selectedChange)="vtuberFilter.set($event)" />
+      <vts-vtuber-filter (selectedChange)="handleSelectedChange($event)" />
       <div class="flex-1"></div>
       @if (kind === "REVENUE") {
         <vts-menu

@@ -164,6 +164,13 @@ export default class ChannelStats {
     }
   }
 
+  handleSelectedChange(eventObj : Set<string>) : void {
+    // Since Signals poorly handles array or set changes,
+    // simply create a new Set and pass old set in to make the 
+    // signal detect changes
+    this.vtuberFilter.set(new Set(eventObj))
+  }
+
   get currencyOptions() {
     return this.currencies.map((c) => ({
       value: c[0],
