@@ -1,28 +1,17 @@
 import { Injectable, computed, inject } from "@angular/core";
 
 import { localStorageSignal } from "src/utils";
-import {
-  CATALOG_CHANNELS,
-  CATALOG_GROUPS,
-  CATALOG_VTUBERS,
-  QUERY_CLIENT,
-} from "../tokens";
+import { CATALOG_CHANNELS, CATALOG_GROUPS, CATALOG_VTUBERS } from "../tokens";
 
 @Injectable({ providedIn: "root" })
 export class VTuberService {
-  queryClient = inject(QUERY_CLIENT);
+  showRetired = localStorageSignal<boolean>("vts:showRetired", true);
 
   nameSetting = localStorageSignal<
     "nativeName" | "englishName" | "japaneseName"
   >("vts:nameSetting", "nativeName");
-  selected = localStorageSignal<string[]>("vts:vtuberSelected", []);
 
-  selectedIds = computed(() => {
-    const selected = this.selected();
-    return this.vtubers
-      .map((v) => v.vtuberId)
-      .filter((id) => selected.includes(id));
-  });
+  private selectedIds = localStorageSignal<string[]>("vts:vtuberSelected", []);
 
   vtubers = inject(CATALOG_VTUBERS);
   channels = inject(CATALOG_CHANNELS);
@@ -40,20 +29,52 @@ export class VTuberService {
     );
   });
 
+  selected = computed(() => {
+    const ids = this.selectedIds();
+
+    let f = this.vtubers.filter((v) => ids.includes(v.vtuberId));
+
+    if (!this.showRetired()) {
+      f = f.filter((v) => typeof v.retiredAt !== "number");
+    }
+
+    return f;
+  });
+
+  totalVTubers = computed(() => {
+    if (!this.showRetired()) {
+      return this.vtubers.filter((v) => typeof v.retiredAt !== "number").length;
+    }
+    return this.vtubers.length;
+  });
+
   selectedChannels = computed(() => {
     const selected = this.selected();
-    return this.channels.filter((c) => selected.includes(c.vtuberId));
-  });
-
-  groupNames = computed(() => {
-    const nameSetting = this.nameSetting();
-
-    return this.groups.reduce(
-      (acc, i) => {
-        acc[i.groupId] = i[nameSetting] || i.nativeName;
-        return acc;
-      },
-      {} as Record<string, string>,
+    return this.channels.filter((c) =>
+      selected.some((v) => v.vtuberId == c.vtuberId),
     );
   });
+
+  unselectVTuber(id: string) {
+    this.selectedIds.update((arr) => {
+      const index = arr.indexOf(id);
+      if (index !== -1) {
+        const a = [...arr];
+        a.splice(index, 1);
+        return a;
+      }
+
+      return arr;
+    });
+  }
+
+  selectVTuber(id: string) {
+    this.selectedIds.update((arr) => {
+      if (!arr.includes(id)) {
+        return [...arr, id];
+      }
+
+      return arr;
+    });
+  }
 }

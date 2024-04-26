@@ -71,8 +71,8 @@ export type VTuber = {
   japaneseName: string;
   thumbnailUrl: string;
   twitterUsername: string;
-  debutedAt: number | null;
-  retiredAt: number | null;
+  debutedAt?: number;
+  retiredAt?: number;
 };
 
 export type Group = {

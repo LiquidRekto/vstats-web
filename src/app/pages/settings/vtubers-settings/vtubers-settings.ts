@@ -2,6 +2,7 @@ import { FlatTreeControl } from "@angular/cdk/tree";
 import { Component, computed, effect, inject } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatExpansionModule } from "@angular/material/expansion";
 import { MatIconModule } from "@angular/material/icon";
 import {
   MatTreeFlatDataSource,
@@ -12,6 +13,7 @@ import {
 import { Group } from "src/app/models";
 import { AvatarPipe } from "src/app/shared";
 import { VTuberService } from "src/app/shared/config/vtuber.service";
+import { VTubersSettingsFilter } from "./vtubers-settings-filter/vtubers-settings-filter";
 
 interface Node {
   id: string;
@@ -26,8 +28,10 @@ interface Node {
     MatTreeModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatExpansionModule,
     MatIconModule,
     AvatarPipe,
+    VTubersSettingsFilter,
   ],
   selector: "vts-vtubers-settings",
   templateUrl: "vtubers-settings.html",
@@ -56,7 +60,7 @@ export class VTubersSettings {
       return node.children.every((node) => this.isChecked(node));
     }
 
-    return this.vtuberSrv.selectedIds().includes(node.id);
+    return this.vtuberSrv.selected().some((v) => v.vtuberId === node.id);
   }
 
   isPartiallyChecked(node: Node): boolean {
@@ -67,16 +71,17 @@ export class VTubersSettings {
       );
     }
 
-    return this.vtuberSrv.selectedIds().includes(node.id);
+    return this.vtuberSrv.selected().some((v) => v.vtuberId === node.id);
   }
 
-  selectedCount = computed(() => this.vtuberSrv.selectedIds().length);
+  selectedCount = computed(() => this.vtuberSrv.selected().length);
 
-  total = computed(() => this.vtuberSrv.vtubers.length);
+  total = computed(() => this.vtuberSrv.totalVTubers());
 
   dataSourceEffect = effect(() => {
     const groups = this.vtuberSrv.groups;
     const vtubers = this.vtuberSrv.vtubers;
+    const showRetired = this.vtuberSrv.showRetired();
     const nameSetting = this.vtuberSrv.nameSetting();
 
     const inflate = (group: Group): Node => ({
@@ -95,12 +100,14 @@ export class VTubersSettings {
               const vtuber = vtubers.find((v) => v.vtuberId === vtuberId);
 
               if (vtuber) {
-                arr.push({
-                  id: vtuberId,
-                  label: vtuber[nameSetting] || vtuber.nativeName,
-                  expandable: false,
-                  children: [],
-                });
+                if (showRetired || typeof vtuber.retiredAt !== "number") {
+                  arr.push({
+                    id: vtuberId,
+                    label: vtuber[nameSetting] || vtuber.nativeName,
+                    expandable: false,
+                    children: [],
+                  });
+                }
               } else {
                 console.error(`Can't find ${id}`);
               }
@@ -110,7 +117,8 @@ export class VTubersSettings {
               );
 
               if (group) {
-                arr.push(inflate(group));
+                const node = inflate(group);
+                if (node.children.length > 0) arr.push(node);
               } else {
                 console.error(`Can't find ${id} `);
               }
@@ -125,7 +133,8 @@ export class VTubersSettings {
     this.dataSource.data = groups
       .filter((g) => g.root)
       .sort((a, b) => a.groupId.localeCompare(b.groupId))
-      .map(inflate);
+      .map(inflate)
+      .filter((g) => g.children.length > 0);
   });
 
   toggle(node: Node, checked: boolean) {
@@ -141,13 +150,7 @@ export class VTubersSettings {
       return node.children.forEach((node) => this.check(node));
     }
 
-    this.vtuberSrv.selected.update((arr) => {
-      const a = [...arr];
-      if (!a.includes(node.id)) {
-        a.push(node.id);
-      }
-      return a;
-    });
+    this.vtuberSrv.selectVTuber(node.id);
   }
 
   uncheck(node: Node): void {
@@ -155,13 +158,6 @@ export class VTubersSettings {
       return node.children.forEach((node) => this.uncheck(node));
     }
 
-    this.vtuberSrv.selected.update((arr) => {
-      const a = [...arr];
-      const index = a.indexOf(node.id);
-      if (index !== -1) {
-        a.splice(index, 1);
-      }
-      return a;
-    });
+    this.vtuberSrv.unselectVTuber(node.id);
   }
 }

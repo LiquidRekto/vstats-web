@@ -56,11 +56,12 @@ export class VTuberFilter {
 
   _isOpen = false;
 
-  _vtubers = this.vtubers.selectedIds();
+  _vtubers = this.vtubers.selected();
 
   selectedChange = output<Set<string>>();
 
   public clear() {
+    this._isOpen = false;
     this.selected.clear();
     this.selectedChange.emit(this.selected);
   }
@@ -74,6 +75,7 @@ export class VTuberFilter {
       }
     });
 
-    this.selectedChange.emit(this.selected);
+    // FIXME:
+    this.selectedChange.emit(new Set([...this.selected]));
   }
 }

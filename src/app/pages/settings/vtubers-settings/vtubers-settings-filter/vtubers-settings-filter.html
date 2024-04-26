@@ -1,0 +1,8 @@
+<mat-checkbox
+  [checked]="vtuberSrv.showRetired()"
+  (change)="vtuberSrv.showRetired.set($event.checked)"
+  color="primary"
+  i18n="@@show-retired"
+>
+  Show graduated/terminated VTubers
+</mat-checkbox>

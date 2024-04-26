@@ -11,7 +11,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
   template: `
     <button
       mat-icon-button
-      [disabled]="isLoading"
+      [disabled]="isLoading()"
       (click)="onRefresh.emit()"
       i18n-matTooltip="@@updated-at"
       matTooltip="Updated at {{ updatedAt() | date: 'MM/dd HH:mm' }}"

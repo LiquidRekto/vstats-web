@@ -40,7 +40,7 @@
         tabindex="0"
         role="button"
         class="cursor-pointer"
-        (click)="_isOpen = false; clear()"
+        (click)="clear()"
         i18n="@@clear"
       >
         Clear
@@ -50,16 +50,19 @@
       class="-mat-list-density-2 !p-0"
       (selectionChange)="onListChange($event)"
     >
-      @for (vtb of _vtubers; track vtb) {
-        <mat-list-option [value]="vtb" [selected]="selected.has(vtb)">
+      @for (vtb of _vtubers; track vtb.vtuberId) {
+        <mat-list-option
+          [value]="vtb.vtuberId"
+          [selected]="selected.has(vtb.vtuberId)"
+        >
           <img
             class="!h-8 !w-8"
             height="32"
             width="32"
             matListItemAvatar
-            [src]="vtb | avatar"
+            [src]="vtb?.thumbnailUrl"
           />
-          {{ vtb | name }}
+          {{ vtb.vtuberId | name }}
         </mat-list-option>
       }
     </mat-selection-list>
