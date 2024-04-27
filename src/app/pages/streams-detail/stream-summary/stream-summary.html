@@ -50,7 +50,9 @@
     </a>
 
     <div class="mb-2">
-      <span class="mat-small">Start time:</span>
+      <span class="mat-small"
+        ><span i18n="@@start-time">Start time</span>:
+      </span>
       <span class="mat-body-1">
         {{ stream()?.startTime | date: "yyyy/MM/dd HH:mm:ss" }}
       </span>
@@ -58,7 +60,7 @@
 
     @if (stream()?.status === "ENDED") {
       <div class="mb-2">
-        <span class="mat-small">End time:</span>
+        <span class="mat-small"><span i18n="@@end-time">End time</span>: </span>
         <span class="mat-body-1">
           {{ stream()?.endTime | date: "yyyy/MM/dd HH:mm:ss" }}
         </span>
@@ -66,7 +68,7 @@
     }
 
     <div>
-      <span class="mat-small">Duration: </span>
+      <span class="mat-small"><span i18n="@@duration">Duration</span>: </span>
       <span class="mat-body-1">
         {{
           stream()?.status === "ENDED"
@@ -82,7 +84,9 @@
   class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 mat-border-divider rounded border border-solid mb-4"
 >
   <div>
-    <div class="mat-small mat-secondary-text">Avg./max viewers</div>
+    <div class="mat-small mat-secondary-text" i18n="@@avg-max-viewers">
+      Avg./max viewers
+    </div>
     <div class="mat-headline-5 m-0">
       {{ stream()?.viewerAvg ? (stream()?.viewerAvg | number) : "---" }}
       <span class="mat-body">/</span>
@@ -92,7 +96,9 @@
   @if (stream()?.platform === "YOUTUBE") {
     <div>
       <div class="mat-small mat-secondary-text">
-        <span class="align-middle"> Likes / dislikes </span>
+        <span class="align-middle" i18n="@@likes-and-dislikes">
+          Likes / dislikes
+        </span>
         <mat-icon
           class="!h-[12px] !w-[12px] leading-[12px] align-middle"
           svgIcon="information_outline"

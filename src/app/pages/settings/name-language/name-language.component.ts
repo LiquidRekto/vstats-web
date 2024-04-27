@@ -14,11 +14,17 @@ export class NameLanguageComponent {
   nameSetting = inject(VTuberService).nameSetting;
 
   readonly languages = [
-    { value: "nativeName", label: "Native (e.g. 白上フブキ, Mori Calliope)" },
+    {
+      value: "nativeName",
+      label: $localize`:@@native-name-label:Native (e.g. 白上フブキ, Mori Calliope)`,
+    },
     {
       value: "englishName",
-      label: "English (e.g. Shirakami Fubuki, Mori Calliope)",
+      label: $localize`:@@english-name-label:English (e.g. Shirakami Fubuki, Mori Calliope)`,
     },
-    { value: "japaneseName", label: "Japanese (e.g. 白上フブキ, 森カリオペ)" },
+    {
+      value: "japaneseName",
+      label: $localize`:@@japanese-name-label:Japanese (e.g. 白上フブキ, 森カリオペ)`,
+    },
   ];
 }
