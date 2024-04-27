@@ -39,7 +39,7 @@ export class VTuberFilter {
   @ViewChild('filterMenuTrigger') filterMenuTrigger: MatMenuTrigger | undefined;
   
   handleOnSearchChange(e : EventTarget) {
-    this.searchText = (e as HTMLInputElement).value
+    this.searchText = (e as HTMLInputElement).value.toLowerCase()
 
     // Resets the array
     this._vtubers = this.vtubers.selected().map(v => v.vtuberId);
@@ -48,7 +48,10 @@ export class VTuberFilter {
     // Then maps into id array
     if (this.searchText.length > 0) {
       this._vtubers = this.vtubers.vtubers.filter((v) => {
-        return this._vtubers.includes(v.vtuberId) && (v.englishName?.toLocaleLowerCase().includes(this.searchText) || v.japaneseName?.toLocaleLowerCase().includes(this.searchText))
+        return this._vtubers.includes(v.vtuberId) 
+        && (v.englishName?.toLocaleLowerCase().includes(this.searchText) 
+        || v.japaneseName?.toLocaleLowerCase().includes(this.searchText)
+        || v.nativeName?.toLocaleLowerCase().includes(this.searchText))
       }).map((sv) => sv.vtuberId);
     }
   }
