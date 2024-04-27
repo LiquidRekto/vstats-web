@@ -1,11 +1,11 @@
 <button
   class="!rounded-full"
   mat-stroked-button
-  (click)="_isOpen = !_isOpen"
   [color]="selected.size > 0 ? 'primary' : null"
   type="button"
-  cdkOverlayOrigin
-  #trigger="cdkOverlayOrigin"
+  #filterMenuTrigger="matMenuTrigger"
+  [matMenuTriggerFor]="filterMenu"
+  (menuClosed)="searchText.set('')"
 >
   VTuber
   @if (selected.size > 0) {
@@ -14,57 +14,62 @@
 
   <mat-icon
     [color]="selected.size > 0 ? 'primary' : null"
-    [class.rotate-180]="_isOpen"
+    [class.rotate-180]="filterMenuTrigger.menuOpen"
     iconPositionEnd
     svgIcon="menu-down"
   />
 </button>
 
-<ng-template
-  cdkConnectedOverlay
-  [cdkConnectedOverlayScrollStrategy]="closeScrollStrategy"
-  [cdkConnectedOverlayOrigin]="trigger"
-  [cdkConnectedOverlayOpen]="_isOpen"
-  [cdkConnectedOverlayPositions]="positions"
-  (overlayOutsideClick)="$event.stopPropagation(); _isOpen = false"
-  (attach)="_isOpen = true"
-  (detach)="_isOpen = false"
->
-  <div
-    class="mat-bg-card mat-elevation-z4 rounded m-0 p-0 max-h-80 overflow-y-auto"
-    [@transformPanel]="_isOpen"
-  >
-    <div class="sticky text-sm flex top-0 mat-bg-card px-4 py-2 z-50">
-      <div class="flex-1" i18n="@@filter-by-vtuber">Filter by VTuber</div>
+<mat-menu #filterMenu="matMenu" class="max-h-80 mt-2">
+  <ng-template matMenuContent>
+    <div (click)="$event.stopPropagation(); $event.preventDefault()">
       <div
-        tabindex="0"
-        role="button"
-        class="cursor-pointer"
-        (click)="clear()"
-        i18n="@@clear"
+        class="sticky top-0 flex px-3 pt-1 pb-3 mat-border-divider mat-bg-card border-b border-solid border-t-0 border-x-0 gap-1 items-center"
       >
-        Clear
-      </div>
-    </div>
-    <mat-selection-list
-      class="-mat-list-density-2 !p-0"
-      (selectionChange)="onListChange($event)"
-    >
-      @for (vtb of _vtubers; track vtb.vtuberId) {
-        <mat-list-option
-          [value]="vtb.vtuberId"
-          [selected]="selected.has(vtb.vtuberId)"
+        <mat-icon class="!h-5 !w-5 mat-secondary-text" svgIcon="search" />
+
+        <input
+          class="flex-1 p-0 block bg-transparent outline-0 border-0 mat-secondary-text"
+          type="text"
+          (input)="handleOnSearchChange($event.target!)"
+          placeholder="Search"
+          i18n-placeholder="@@search"
+        />
+
+        <button
+          class="cursor-pointer p-0 bg-transparent outline-0 border-0 mat-secondary-text font-bold"
+          (click)="clear()"
+          i18n="@@clear"
         >
-          <img
-            class="!h-8 !w-8"
-            height="32"
-            width="32"
-            matListItemAvatar
-            [src]="vtb?.thumbnailUrl"
-          />
-          {{ vtb.vtuberId | name }}
-        </mat-list-option>
-      }
-    </mat-selection-list>
-  </div>
-</ng-template>
+          Clear
+        </button>
+      </div>
+
+      <mat-selection-list
+        class="-mat-list-density-2 !p-0"
+        (selectionChange)="onListChange($event)"
+      >
+        @for (vtb of _vtubers(); track vtb.vtuberId) {
+          <mat-list-option
+            [value]="vtb.vtuberId"
+            [selected]="selected.has(vtb.vtuberId)"
+          >
+            <img
+              class="!h-8 !w-8"
+              [class.grayscale]="!!vtb.retiredAt"
+              height="32"
+              width="32"
+              matListItemAvatar
+              [src]="vtb?.thumbnailUrl"
+            />
+            {{ vtb.vtuberId | name }}
+          </mat-list-option>
+        } @empty {
+          <div class="p-4">
+            <i>(no results)</i>
+          </div>
+        }
+      </mat-selection-list>
+    </div>
+  </ng-template>
+</mat-menu>

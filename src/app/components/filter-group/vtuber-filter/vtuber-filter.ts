@@ -1,67 +1,84 @@
+import { Overlay } from "@angular/cdk/overlay";
 import {
-  ConnectedPosition,
-  Overlay,
-  OverlayModule,
-} from "@angular/cdk/overlay";
-import { NgOptimizedImage } from "@angular/common";
-import { Component, ViewEncapsulation, inject, output } from "@angular/core";
+  Component,
+  computed,
+  inject,
+  output,
+  signal,
+  viewChild,
+} from "@angular/core";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
 import { MatListModule, MatSelectionListChange } from "@angular/material/list";
+import {
+  MAT_MENU_SCROLL_STRATEGY,
+  MatMenuModule,
+  MatMenuTrigger,
+} from "@angular/material/menu";
 import { MatTooltipModule } from "@angular/material/tooltip";
+
 import { AvatarPipe, NamePipe } from "src/app/shared";
 import { VTuberService } from "src/app/shared/config/vtuber.service";
-
-import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
-import animations from "../_animations";
 
 @Component({
   standalone: true,
   imports: [
     MatTooltipModule,
     MatListModule,
-    OverlayModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatMenuModule,
     NamePipe,
     AvatarPipe,
-    NgOptimizedImage,
     MatButtonModule,
     MatIconModule,
   ],
   selector: "vts-vtuber-filter",
   templateUrl: "vtuber-filter.html",
-  animations,
-  encapsulation: ViewEncapsulation.None,
+  providers: [
+    {
+      provide: MAT_MENU_SCROLL_STRATEGY,
+      deps: [Overlay],
+      useFactory: (overlay: Overlay) => () => overlay.scrollStrategies.close(),
+    },
+  ],
 })
 export class VTuberFilter {
-  closeScrollStrategy = inject(Overlay).scrollStrategies.close();
-  positions: ConnectedPosition[] = [
-    {
-      originX: "start",
-      originY: "bottom",
-      overlayX: "start",
-      overlayY: "top",
-      offsetY: 10,
-    },
-    {
-      originX: "start",
-      originY: "top",
-      overlayX: "start",
-      overlayY: "bottom",
-      offsetY: -10,
-    },
-  ];
-
   private vtubers = inject(VTuberService);
 
   selected: Set<string> = new Set();
 
-  _isOpen = false;
+  _vtubers = computed(() => {
+    const searchText = this.searchText();
 
-  _vtubers = this.vtubers.selected();
+    let f = this.vtubers.selected();
+
+    if (searchText.length > 0) {
+      f = f.filter(
+        (v) =>
+          v.englishName?.toLocaleLowerCase().includes(searchText) ||
+          v.japaneseName?.toLocaleLowerCase().includes(searchText) ||
+          v.nativeName?.toLocaleLowerCase().includes(searchText),
+      );
+    }
+
+    return f;
+  });
 
   selectedChange = output<Set<string>>();
 
+  searchText = signal("");
+
+  filterMenuTrigger = viewChild.required<MatMenuTrigger>("filterMenuTrigger");
+
+  handleOnSearchChange(e: EventTarget) {
+    this.searchText.set((<HTMLInputElement>e).value.trim().toLowerCase());
+  }
+
   public clear() {
-    this._isOpen = false;
+    this.filterMenuTrigger().closeMenu();
     this.selected.clear();
     this.selectedChange.emit(this.selected);
   }
