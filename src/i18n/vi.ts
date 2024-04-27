@@ -3,6 +3,7 @@
 export { default as locale } from "@angular/common/locales/vi";
 export { default as dateFnsLocale } from "date-fns/locale/vi";
 
+import { VSTATS_DISCORD_URL } from "src/constants/misc";
 import type { translations as t } from "./messages.json";
 
 export const translations: typeof t = {
@@ -39,7 +40,7 @@ export const translations: typeof t = {
   "about-1": "vtstats là nền tảng cho việc Thống Kê thông tin các Vtuber cũng như Trực Quan Hoá Dữ Liệu. ",
   "about-2": "Đây là dự án mã nguồn mở, bạn có thể tìm thấy mã nguồn tại {$START_LINK}GitHub{$CLOSE_LINK}.",
   "about-3": " Nếu như bạn thấy trang web này hữu ích, hãy cân nhắc ủng hộ thông qua",
-  "about-4": "Tham gia server Discord tại {$START_LINK}https://discord.gg/m9NwUzKbkK{$CLOSE_LINK}. ",
+  "about-4": `Tham gia server Discord tại {$START_LINK}${VSTATS_DISCORD_URL}{$CLOSE_LINK}. `,
   "about-5": " Cảm ơn {$START_LINK}Return YouTube Dislike{$CLOSE_LINK} đã cung cấp thông tin lượt thích/không thích của YouTube.",
   "filter-by-vtuber": "Lọc theo Vtuber",
   "clear": "Xoá",
