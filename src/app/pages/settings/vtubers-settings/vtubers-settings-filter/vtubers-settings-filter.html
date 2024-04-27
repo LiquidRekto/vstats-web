@@ -1,8 +1,8 @@
 <div class="mat-border-divider rounded border-2 border-solid">
     <mat-accordion>
-    <mat-expansion-panel class="py-4">
+    <mat-expansion-panel class="py-4" [expanded]="true">
       <mat-expansion-panel-header>
-        <mat-panel-title class="mat-primary-text">
+        <mat-panel-title class="mat-primary-text" i18n="@@filters">
           Filters
         </mat-panel-title>
       </mat-expansion-panel-header>
@@ -11,8 +11,9 @@
         [checked]="allowRetired"
         (change)="setAllowRetired($event.checked)"
         color="primary"
+        i18n="@@show-retired"
       >
-        Show retired VTubers
+        Show graduated/terminated VTubers
       </mat-checkbox>
       </div>
     </mat-expansion-panel>

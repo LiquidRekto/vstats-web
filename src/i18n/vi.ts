@@ -69,6 +69,8 @@ export const translations: typeof t = {
   "yt-account": "Tài khoản YouTube",
   "theme": "Chủ đề",
   "timezone": "Múi giờ",
+  "filters": " Bộ lọc ",
+  "show-retired": " Hiển thị những Vtuber đã tốt nghiệp/bị đuổi học ",
   "selected-vtuber-per-total": " Đã chọn {$INTERPOLATION} trên {$INTERPOLATION_1}\n",
   "currency-aed": "Dirham Các tiểu vương quốc Ả Rập thống nhất",
   "currency-afn": "Afghani Afghanistan",

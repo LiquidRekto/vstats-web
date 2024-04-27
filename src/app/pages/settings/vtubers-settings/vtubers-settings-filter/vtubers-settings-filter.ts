@@ -1,6 +1,7 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, Input, OnChanges, SimpleChanges, inject } from "@angular/core";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { VTuberService } from "src/app/shared/config/vtuber.service";
 
 @Component({
     standalone: true,
@@ -12,16 +13,12 @@ import { MatExpansionModule } from "@angular/material/expansion";
     templateUrl: "vtubers-settings-filter.html",
 })
 export class VTubersSettingsFilter {
-  @Input() allowRetired : boolean = false; // State for allowing retired talents
+  vtuberSrv = inject(VTuberService)
+
+  @Input() allowRetired : boolean = this.vtuberSrv.allowRetired(); // State for allowing retired talents
 
   setAllowRetired(allowRetired : boolean) {
     this.allowRetired = allowRetired;
-    this.refreshCatalog()
+    this.vtuberSrv.allowRetired.set(allowRetired);
   }
-
-  refreshCatalog() : void {
-    // TODO : call API for catalog for every change
-    
-  }
-
 }

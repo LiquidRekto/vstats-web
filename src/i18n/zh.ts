@@ -74,6 +74,8 @@ export const translations: typeof t = {
   "yt-account": "YouTube Account",
   "theme": "Theme",
   "timezone": "Timezone",
+  "filters": " Filters ",
+  "show-retired": " Show graduated/terminated VTubers ",
   "selected-vtuber-per-total": " Selected {$INTERPOLATION} out of {$INTERPOLATION_1}\n",
   // streamLikes: "喜歡",
   "currency-gbp": "英鎊",
