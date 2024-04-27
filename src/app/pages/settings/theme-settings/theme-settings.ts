@@ -13,8 +13,8 @@ export class ThemeSettings {
   themeSetting = inject(ThemeService).themeSetting;
 
   readonly options = [
-    { label: "System default", value: "followSystem" },
-    { label: "Light", value: "light" },
-    { label: "Dark", value: "dark" },
+    { label: $localize`:@@theme-sys-default-label:System default`, value: "followSystem" },
+    { label: $localize`:@@theme-light:Light`, value: "light" },
+    { label: $localize`:@@theme-dark:Dark`, value: "dark" },
   ];
 }
