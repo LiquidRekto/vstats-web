@@ -6,7 +6,7 @@
     (selectionChange)="config.setTimezone($event.value)"
   >
     <mat-option value="none">
-      None ({{ everyMinute$ | async | date: "MM/dd HH:mm" }})
+      <span i18n="@@none">None</span> ({{ everyMinute$ | async | date: "MM/dd HH:mm" }})
     </mat-option>
     @for (timezone of timezones; track timezone) {
       <mat-option [value]="timezone">
