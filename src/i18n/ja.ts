@@ -75,6 +75,8 @@ export const translations: typeof t = {
   "theme": "Theme",
   "on-air": "On Air",
   "timezone": "Timezone",
+  "filters": " Filters ",
+  "show-retired": " Show graduated/terminated VTubers ",
   "selected-vtuber-per-total": " Selected {$INTERPOLATION} out of {$INTERPOLATION_1}\n",
   // streamLikes: "高く評価",
   "currency-gbp": "UKポンド",

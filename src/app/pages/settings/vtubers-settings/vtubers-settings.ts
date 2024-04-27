@@ -76,11 +76,12 @@ export class VTubersSettings {
 
   selectedCount = computed(() => this.vtuberSrv.selectedIds().length);
 
-  total = computed(() => this.vtuberSrv.vtubers.length);
+  total = computed(() => this.vtuberSrv.totalVTubers());
 
   dataSourceEffect = effect(() => {
     const groups = this.vtuberSrv.groups;
     const vtubers = this.vtuberSrv.vtubers;
+    const allowRetired = this.vtuberSrv.allowRetired();
     const nameSetting = this.vtuberSrv.nameSetting();
 
     const inflate = (group: Group): Node => ({
@@ -96,7 +97,7 @@ export class VTubersSettings {
           (arr, id) => {
             if (id.startsWith("vtuber:")) {
               const vtuberId = id.slice("vtuber:".length);
-              const vtuber = vtubers.find((v) => v.vtuberId === vtuberId);
+              const vtuber = vtubers.find((v) => v.vtuberId === vtuberId && (!allowRetired ? v.retiredAt === null : true));
 
               if (vtuber) {
                 arr.push({
