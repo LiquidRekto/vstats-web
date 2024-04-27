@@ -126,6 +126,10 @@ const icons: Array<[string, string]> = [
     "discord",
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M8 12a1 1 0 1 0 2 0 1 1 0 0 0-2 0m6 0a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M15.5 17c0 1 1.5 3 2 3 1.5 0 2.8-1.7 3.5-3 .7-1.7.5-5.8-1.5-11.5-1.5-1-3-1.3-4.5-1.5l-1 2a12 12 0 0 0-4 0L9 4c-1.5.2-3 .5-4.5 1.5-2 5.7-2.2 9.8-1.5 11.5.7 1.3 2 3 3.5 3 .5 0 2-2 2-3"/><path d="M7 16.5c3.5 1 6.5 1 10 0"/></g></svg>',
   ],
+  [
+    "search",
+    '<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>'
+  ]
 ];
 
 @Component({
