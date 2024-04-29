@@ -48,7 +48,7 @@ export class VTuberService {
     );
   });
 
-  private retiredVtuberIds = this.vtubers.filter((v) => v.retiredAt !== null).map((v) => v.vtuberId)
+  private retiredVtuberIds = this.vtubers.filter((v) => !!v.retiredAt).map((v) => v.vtuberId)
 
   totalVTubers = computed(() => {
     const allowRetired = this.allowRetired();

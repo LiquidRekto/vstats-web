@@ -97,7 +97,7 @@ export class VTubersSettings {
           (arr, id) => {
             if (id.startsWith("vtuber:")) {
               const vtuberId = id.slice("vtuber:".length);
-              const vtuber = vtubers.find((v) => v.vtuberId === vtuberId && (!allowRetired ? v.retiredAt === null : true));
+              const vtuber = vtubers.find((v) => v.vtuberId === vtuberId && (!allowRetired ? !v.retiredAt : true));
 
               if (vtuber) {
                 arr.push({
