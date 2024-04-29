@@ -9,25 +9,27 @@
     svgIcon="menu-down" />
 </button>
 <!-- Replacing with mat-menu for better responsive UI -->
-<mat-menu #filterMenu="matMenu" class="max-h-80 overflow-y-auto">
+<mat-menu #filterMenu="matMenu" class="max-h-80 mt-2 overflow-y-auto">
   <!-- 
     THIS IS A HACK, TO PREVENT THE MENU CLOSING FOR EVERY
     SINGLE CHILD ELEMENT INSIDE
   -->
   <span (click)="$event.stopPropagation();$event.preventDefault();">
-    <div class="sticky text-md flex top-0 mat-bg-card px-4 py-2 z-50">
-      <div class="flex-1 font-bold" i18n="@@filter-by-vtuber">Filter by VTuber</div>
-      <div tabindex="0" role="button" class="cursor-pointer" (click)="closeMenu(); clear()" i18n="@@clear">
+    <div class="sticky text-md top-0 mat-bg-card px-4 pt-2 z-50">
+      <div class="flex justify-between">
+        <div class="flex w-50 font-bold" i18n="@@filter-by-vtuber">Filter by VTuber</div>
+        <div class="w-50" tabindex="0" role="button" class="cursor-pointer" (click)="closeMenu(); clear()" i18n="@@clear">
         Clear
+        </div>
+      </div>
+      <div class="flex justify-start pt-2">
+        <mat-form-field class="!py-0 w-full" density="compact" appearance="outline">
+          <input type="text" (input)="handleOnSearchChange($event.target!)" matInput [value]="searchText" i18n-placeholder="@@search" placeholder="Search">
+          <mat-icon matSuffix svgIcon="search" />
+        </mat-form-field>
       </div>
     </div>
-    <div class="px-4 py-2">
-      <mat-form-field class="py-0 w-full" density="compact" appearance="outline">
-        <input type="text" (input)="handleOnSearchChange($event.target!)" matInput placeholder="Search">
-        <mat-icon matSuffix svgIcon="search" />
-      </mat-form-field>
-
-    </div>
+    
     <mat-selection-list class="-mat-list-density-2 !p-0" (selectionChange)="onListChange($event)">
       @for (vtb of _vtubers; track vtb) {
       <mat-list-option [value]="vtb" [selected]="selected.has(vtb)">

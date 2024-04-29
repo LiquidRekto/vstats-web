@@ -30,7 +30,7 @@ export class VTuberFilter {
   private vtubers = inject(VTuberService);
 
   selected: Set<string> = new Set();
-  _vtubers = this.vtubers.selectedIds();
+  _vtubers = this.vtubers.selected().map(v => v.vtuberId);
 
   selectedChange = output<Set<string>>();
 
@@ -39,19 +39,23 @@ export class VTuberFilter {
   @ViewChild('filterMenuTrigger') filterMenuTrigger: MatMenuTrigger | undefined;
   
   handleOnSearchChange(e : EventTarget) {
-    this.searchText = (e as HTMLInputElement).value.toLowerCase()
+    this.searchText = (e as HTMLInputElement).value.toLowerCase();
 
+    this.updateSearchQuery(this.searchText);
+  }
+
+  private updateSearchQuery = (value: string) => {
     // Resets the array
-    this._vtubers = this.vtubers.selectedIds();
+    this._vtubers = this.vtubers.selected().map(v => v.vtuberId);
 
     // If search text is not empty, search vtubers by their names containing the search string
     // Then maps into id array
-    if (this.searchText.length > 0) {
+    if (value.length > 0) {
       this._vtubers = this.vtubers.vtubers.filter((v) => {
-        return this._vtubers.includes(v.vtuberId) 
-        && (v.englishName?.toLocaleLowerCase().includes(this.searchText) 
-        || v.japaneseName?.toLocaleLowerCase().includes(this.searchText)
-        || v.nativeName?.toLocaleLowerCase().includes(this.searchText))
+        return this._vtubers.includes(v.vtuberId)
+          && (v.englishName?.toLocaleLowerCase().includes(this.searchText)
+            || v.japaneseName?.toLocaleLowerCase().includes(this.searchText)
+            || v.nativeName?.toLocaleLowerCase().includes(this.searchText))
       }).map((sv) => sv.vtuberId);
     }
   }
@@ -61,8 +65,9 @@ export class VTuberFilter {
   }
 
   public clear() {
-    this._isOpen = false;
     this.selected.clear();
+    this.searchText = '';
+    this.updateSearchQuery(this.searchText);
     this.selectedChange.emit(this.selected);
   }
 

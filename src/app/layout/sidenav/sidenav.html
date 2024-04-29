@@ -1,5 +1,11 @@
 <div class="w-64 min-h-full flex flex-col mr-4">
-  <mat-nav-list class="flex-1">
+  <mat-nav-list id="nav-area" class="flex-1">
+    <vts-sidenav-menu
+      i18n-headline="@@general"
+      headline="general"
+      [items]="generalItems"
+    />
+    <mat-divider class="!mr-2 !my-2" />
     <vts-sidenav-menu
       i18n-headline="@@channel"
       headline="channel"
@@ -12,16 +18,12 @@
       [items]="streamsItems"
     />
     <mat-divider class="!mr-2 !my-2" />
-    <vts-sidenav-menu
-      i18n-headline="@@visualize"
-      headline="visualize"
-      [items]="visualizeItems"
-    />
-    <mat-divider class="!mr-2 !my-2" />
     <vts-sidenav-menu [items]="extraItems" />
-  </mat-nav-list>
 
-  <div class="p-4 mat-small mat-secondary-text mat-bg sticky bottom-0 z-50">
+  </mat-nav-list>
+  <div class="sticky bottom-0 z-100 mat-secondary-text mat-bg">
+      <mat-divider/>
+  <div class="p-4 mat-small">
     <a
       class="text-inherit leading-5 no-underline"
       href="https://github.com/PoiScript/HoloStats/commit/{{ commitSha }}"
@@ -33,4 +35,5 @@
     <br />
     &copy; 2019-2024 PoiScript
   </div>
+</div>
 </div>

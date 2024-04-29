@@ -102,6 +102,7 @@
         <mat-icon
           class="!h-[12px] !w-[12px] leading-[12px] align-middle"
           svgIcon="information_outline"
+          i18n-matTooltip="@@like-dislike-tooltip"
           matTooltip="Provided by Return YouTube Dislike"
           matTooltipPosition="above"
         />
@@ -129,12 +130,7 @@
       <mat-icon
         class="!h-[12px] !w-[12px] leading-[12px] align-middle"
         svgIcon="information_outline"
-        [matTooltip]="
-          'Only includes ' +
-          (stream()?.platform == 'YOUTUBE'
-            ? 'YouTube Super Chat & Super Sticker'
-            : 'Twitch Cheering & Hyper Chat')
-        "
+        [matTooltip]="revenueTooltipText()"
         matTooltipPosition="above"
       />
     </div>
