@@ -68,6 +68,7 @@ export type StreamEventsGroup = {
       <div
         [style.height.px]="300"
         class="items-center justify-center flex mat-secondary-text tracking-widest text-lg"
+        i18n="@@no-data"
       >
         NO DATA
       </div>

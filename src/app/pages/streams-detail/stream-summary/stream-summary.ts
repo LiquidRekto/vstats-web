@@ -60,6 +60,18 @@ export class StreamSummary {
 
   stream = input<Stream | null>(null);
 
+  revenueTooltipText = computed(() => {
+    const stream = this.stream();
+
+    return (
+      $localize`:@@revenue-tooltip-1:Only includes` +
+      " " +
+      (stream!.platform == "YOUTUBE"
+        ? $localize`:@@revenue-tooltip-youtube:YouTube Super Chat & Super Sticker`
+        : $localize`:@@revenue-tooltip-twitch:Twitch Cheering & Hyper Chat`)
+    );
+  });
+
   sanitizer = inject(DomSanitizer);
 
   revenueQry = query<
