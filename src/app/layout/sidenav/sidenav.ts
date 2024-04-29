@@ -43,7 +43,7 @@ export class Sidenav {
     },
   ];
 
-  readonly visualizeItems = [
+  readonly generalItems = [
     {
       icon: "compare-arrows",
       title: $localize`:@@compare:Compare`,
