@@ -52,7 +52,7 @@ import { CHAT_CURRENCIES } from "src/app/shared/tokens";
       <div class="sm:w-8/12 w-full overflow-auto max-h-80 -mat-table-density-2">
         <table class="sm:px-8 p-0" mat-table [dataSource]="dataSource()">
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <th mat-header-cell *matHeaderCellDef i18n="@@name">Name</th>
             <td mat-cell *matCellDef="let row; index as i">
               <div
                 class="inline-block w-2 h-2 mr-1 rounded-full"
@@ -62,13 +62,27 @@ import { CHAT_CURRENCIES } from "src/app/shared/tokens";
             </td>
           </ng-container>
           <ng-container matColumnDef="count">
-            <th mat-header-cell *matHeaderCellDef class="!text-right">Count</th>
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="!text-right"
+              i18n="@@count"
+            >
+              Count
+            </th>
             <td mat-cell *matCellDef="let row" class="!text-right">
               {{ row.count | number }}
             </td>
           </ng-container>
           <ng-container matColumnDef="value">
-            <th mat-header-cell *matHeaderCellDef class="!text-right">Value</th>
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="!text-right"
+              i18n="@@value"
+            >
+              Value
+            </th>
             <td mat-cell *matCellDef="let row" class="!text-right">
               {{ row.value | currency: currency.currencySetting() }}
             </td>
