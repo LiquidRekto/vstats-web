@@ -12,10 +12,16 @@
       [items]="streamsItems"
     />
     <mat-divider class="!mr-2 !my-2" />
+    <vts-sidenav-menu
+      i18n-headline="@@visualize"
+      headline="visualize"
+      [items]="visualizeItems"
+    />
+    <mat-divider class="!mr-2 !my-2" />
     <vts-sidenav-menu [items]="extraItems" />
   </mat-nav-list>
 
-  <div class="p-4 mat-small mat-secondary-text">
+  <div class="p-4 mat-small mat-secondary-text mat-bg sticky bottom-0 z-50">
     <a
       class="text-inherit leading-5 no-underline"
       href="https://github.com/PoiScript/HoloStats/commit/{{ commitSha }}"

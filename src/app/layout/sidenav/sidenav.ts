@@ -43,6 +43,14 @@ export class Sidenav {
     },
   ];
 
+  readonly visualizeItems = [
+    {
+      icon: "compare-arrows",
+      title: $localize`:@@compare:Compare`,
+      link: "/visualize/compare"
+    },
+  ];
+
   readonly streamsItems = [
     {
       icon: "stream",
