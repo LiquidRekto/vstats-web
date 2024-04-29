@@ -41,6 +41,11 @@ export default [
     data: { kind: ChannelStatsKind.SUBSCRIBER },
   },
   {
+    path: "visualize/compare",
+    title: "compare",
+    loadComponent: () => import("../pages/compare/compare"),
+  },
+  {
     path: "settings",
     title: "settings",
     loadComponent: () => import("../pages/settings/settings"),

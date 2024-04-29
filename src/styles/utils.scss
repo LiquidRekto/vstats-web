@@ -109,8 +109,28 @@
   background-color: mat.get-color-from-palette($background, "card");
 }
 
+.mat-bg {
+  $background: map-get($vts-light-theme, "background");
+  background-color: mat.get-color-from-palette($background, "background");
+}
+.dark .mat-bg {
+  $background: map-get(map-get($vts-dark-theme, 'color'), 'background');
+  background-color: mat.get-color-from-palette($background, "background");
+}
+
 .dense-menu .mat-mdc-menu-item {
   height: 32px;
   line-height: 32px;
   min-height: 0;
 }
+
+.nav-no-scrollbar {
+  .mat-drawer-inner-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mat-drawer-inner-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+ }
