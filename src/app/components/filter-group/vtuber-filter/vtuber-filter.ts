@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation, inject, output } from "@angular/core";
+import { Component, HostListener, ViewChild, computed, inject, output, signal } from "@angular/core";
 import { MatListModule, MatSelectionListChange } from "@angular/material/list";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { AvatarPipe, NamePipe } from "src/app/shared";
@@ -6,7 +6,7 @@ import { VTuberService } from "src/app/shared/config/vtuber.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule, MatMenuTrigger } from "@angular/material/menu";
 
 @Component({
@@ -30,30 +30,42 @@ export class VTuberFilter {
   private vtubers = inject(VTuberService);
 
   selected: Set<string> = new Set();
-  _vtubers = this.vtubers.selected().map(v => v.vtuberId);
-
-  selectedChange = output<Set<string>>();
-
-  searchText = ''
-
-  @ViewChild('filterMenuTrigger') filterMenuTrigger: MatMenuTrigger | undefined;
-  
-  handleOnSearchChange(e : EventTarget) {
-    this.searchText = (e as HTMLInputElement).value.toLowerCase()
-
-    // Resets the array
-    this._vtubers = this.vtubers.selected().map(v => v.vtuberId);
+  //_vtubers = this.vtubers.selected().map(v => v.vtuberId);
+  _vtubers = computed(() => {
+    const searchText = this.searchText();
+    const vtuberIds = this.vtubers.selected().map(v => v.vtuberId);
 
     // If search text is not empty, search vtubers by their names containing the search string
     // Then maps into id array
-    if (this.searchText.length > 0) {
-      this._vtubers = this.vtubers.vtubers.filter((v) => {
-        return this._vtubers.includes(v.vtuberId) 
-        && (v.englishName?.toLocaleLowerCase().includes(this.searchText) 
-        || v.japaneseName?.toLocaleLowerCase().includes(this.searchText)
-        || v.nativeName?.toLocaleLowerCase().includes(this.searchText))
+    if (searchText.length > 0) {
+      return this.vtubers.vtubers.filter((v) => {
+        return vtuberIds.includes(v.vtuberId)
+          && (v.englishName?.toLocaleLowerCase().includes(searchText)
+            || v.japaneseName?.toLocaleLowerCase().includes(searchText)
+            || v.nativeName?.toLocaleLowerCase().includes(searchText))
       }).map((sv) => sv.vtuberId);
+    } else {
+      return vtuberIds;
     }
+  })
+
+  selectedChange = output<Set<string>>();
+
+  searchText = signal('')
+
+  @ViewChild("filterMenuTrigger") filterMenuTrigger: MatMenuTrigger | undefined;
+  @HostListener("window:scroll", [])
+  // Handles scroll on close for mat-menu
+  // Still wondering if there's a solution invloving scroll strategy, but this is the best I can do
+  scrollHandler() {
+    if (this.filterMenuTrigger) {
+      this.closeMenu();
+    }
+  }
+
+
+  handleOnSearchChange(e: EventTarget) {
+    this.searchText.set((e as HTMLInputElement).value.trim().toLowerCase());
   }
 
   public closeMenu() {

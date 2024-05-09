@@ -9,7 +9,7 @@
     svgIcon="menu-down" />
 </button>
 <!-- Replacing with mat-menu for better responsive UI -->
-<mat-menu #filterMenu="matMenu" class="max-h-80 overflow-y-auto">
+<mat-menu #filterMenu="matMenu" class="max-h-80 mt-2 overflow-y-auto">
   <!-- 
     THIS IS A HACK, TO PREVENT THE MENU CLOSING FOR EVERY
     SINGLE CHILD ELEMENT INSIDE
@@ -29,7 +29,7 @@
 
     </div>
     <mat-selection-list class="-mat-list-density-2 !p-0" (selectionChange)="onListChange($event)">
-      @for (vtb of _vtubers; track vtb) {
+      @for (vtb of _vtubers(); track vtb) {
       <mat-list-option [value]="vtb" [selected]="selected.has(vtb)">
         <img class="!h-8 !w-8" height="32" width="32" matListItemAvatar [src]="vtb | avatar" />
         {{ vtb | name }}
