@@ -8,30 +8,23 @@ import {
   viewChild,
 } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
-import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
-import { MatInputModule } from "@angular/material/input";
 import { MatListModule, MatSelectionListChange } from "@angular/material/list";
 import {
   MAT_MENU_SCROLL_STRATEGY,
   MatMenuModule,
   MatMenuTrigger,
 } from "@angular/material/menu";
-import { MatTooltipModule } from "@angular/material/tooltip";
 
-import { AvatarPipe, NamePipe } from "src/app/shared";
+import { NamePipe } from "src/app/shared";
 import { VTuberService } from "src/app/shared/config/vtuber.service";
 
 @Component({
   standalone: true,
   imports: [
-    MatTooltipModule,
     MatListModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatMenuModule,
     NamePipe,
-    AvatarPipe,
     MatButtonModule,
     MatIconModule,
   ],
@@ -41,7 +34,7 @@ import { VTuberService } from "src/app/shared/config/vtuber.service";
     {
       provide: MAT_MENU_SCROLL_STRATEGY,
       deps: [Overlay],
-      useFactory: (overlay: Overlay) => () => overlay.scrollStrategies.close(),
+      useFactory: (overlay: Overlay) => overlay.scrollStrategies.close,
     },
   ],
 })

@@ -20,11 +20,14 @@
   />
 </button>
 
-<mat-menu #filterMenu="matMenu" class="max-h-80 mt-2">
+<mat-menu #filterMenu="matMenu" class="mt-2 max-h-80">
   <ng-template matMenuContent>
-    <div (click)="$event.stopPropagation(); $event.preventDefault()">
+    <div
+      class="-my-2"
+      (click)="$event.stopPropagation(); $event.preventDefault()"
+    >
       <div
-        class="sticky top-0 flex px-3 pt-1 pb-3 mat-border-divider mat-bg-card border-b border-solid border-t-0 border-x-0 gap-1 items-center"
+        class="sticky top-0 flex p-3 mat-border-divider mat-bg-card border-b border-solid border-t-0 border-x-0 gap-1 items-center z-50"
       >
         <mat-icon class="!h-5 !w-5 mat-secondary-text" svgIcon="search" />
 
