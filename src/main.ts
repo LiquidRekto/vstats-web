@@ -92,6 +92,7 @@ const i18nMap = {
   ja: () => import("./i18n/ja"),
   ko: () => import("./i18n/ko"),
   ms: () => import("./i18n/ms"),
+  ru: () => import("./i18n/ru"),
   vi: () => import("./i18n/vi"),
   zh: () => import("./i18n/zh"),
 };
