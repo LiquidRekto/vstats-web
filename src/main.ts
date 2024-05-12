@@ -87,7 +87,10 @@ const createQueryClient = (): QueryClient => {
 const i18nMap = {
   en: () => import("./i18n/en"),
   es: () => import("./i18n/es"),
+  fil: () => import("./i18n/fil"),
+  id: () => import("./i18n/id"),
   ja: () => import("./i18n/ja"),
+  ko: () => import("./i18n/ko"),
   ms: () => import("./i18n/ms"),
   vi: () => import("./i18n/vi"),
   zh: () => import("./i18n/zh"),
